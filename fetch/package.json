@@ -1,0 +1,29 @@
+{
+  "name": "pkgcheck-action-fetch",
+  "version": "1.1.0",
+  "description": "This action fetches the main gentoo repository.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "ncc build src/index.js -o dist",
+    "build-setup-python": "npm install --prefix node_modules/setup-python && npm run build --prefix node_modules/setup-python"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pkgcore/pkgcheck-action.git"
+  },
+  "keywords": [],
+  "author": "Tim Harder <radhermit@gmail.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/pkgcore/pkgcheck-action/issues"
+  },
+  "homepage": "https://github.com/pkgcore/pkgcheck-action#readme",
+  "dependencies": {
+    "@actions/cache": "^1.0.11",
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
+    "setup-python": "github:actions/setup-python#v2"
+  }
+}

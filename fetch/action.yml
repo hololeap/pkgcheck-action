@@ -1,0 +1,10 @@
+name: pkgcheck-fetch
+description: Fetch the main gentoo repository
+inputs:
+  pkgs:
+    description: Target packages to install via pip
+    required: false
+    default: pkgcheck>=0.10.3
+runs:
+  using: node16
+  main: dist/index.js

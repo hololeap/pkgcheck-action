@@ -1,4 +1,4 @@
-name: pkgcheck
+name: pkgcheck-check
 description: Run pkgcheck over an ebuild repository
 inputs:
   args:
