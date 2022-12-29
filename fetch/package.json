@@ -1,7 +1,7 @@
 {
-  "name": "pkgcheck-action",
-  "version": "1.0.0",
-  "description": "This action runs pkgcheck over an ebuild repository.",
+  "name": "pkgcheck-action-fetch",
+  "version": "1.1.0",
+  "description": "This action fetches the main gentoo repository.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/pkgcore/pkgcheck-action#readme",
   "dependencies": {
-    "@actions/cache": "^1.0.7",
-    "@actions/core": "^1.4.0",
-    "@actions/exec": "^1.1.0",
-    "@actions/github": "^5.0.0",
+    "@actions/cache": "^1.0.11",
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
     "setup-python": "github:actions/setup-python#v2"
   }
 }

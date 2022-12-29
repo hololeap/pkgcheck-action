@@ -19,31 +19,6 @@ async function run() {
       pkgcheck_cache_dir,
       pkgcore_cache_dir
     ];
-    // use cache key unique to each run to force cache saves
-    const timestamp = Date.now();
-    const key = `pkgcheck-${github.context.runId}-${timestamp}`;
-    const restoreKeys = [`pkgcheck-${github.context.runId}-`, 'pkgcheck-'];
-    await core.group('Restore cache', async () => {
-      const cache_key = await cache.restoreCache(cache_paths, key, restoreKeys);
-    });
-
-    // use vendored setup-python action
-    // https://github.com/actions/setup-python/issues/38
-    await core.group('Set up python', async () => {
-      const installed = await setupPython.findPythonVersion('3.x', 'x64');
-      core.info(`Successfully set up ${installed.impl}-${installed.version}`);
-    });
-
-    await core.group('Install pkgcheck', async () => {
-      await exec.exec('pip', ['install', '--upgrade', 'pip']);
-      const pkgs = core.getInput('pkgs').split(' ');
-      await exec.exec('pip', ['install', ...pkgs]);
-    });
-
-    await core.group('Sync gentoo repo', async () => {
-      await exec.exec('pmaint', ['sync', 'gentoo']);
-    });
-
     const options = {ignoreReturnCode: true};
     await core.group('Update repo metadata', async () => {
       // ignore metadata generation errors that will be reported by pkgcheck
