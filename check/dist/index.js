@@ -67175,14 +67175,6 @@ module.exports = eval("require")("encoding");
 
 /***/ }),
 
-/***/ 8452:
-/***/ ((module) => {
-
-module.exports = eval("require")("setup-python/lib/find-python");
-
-
-/***/ }),
-
 /***/ 9491:
 /***/ ((module) => {
 
@@ -67407,7 +67399,6 @@ const cache = __nccwpck_require__(3276);
 const core = __nccwpck_require__(6659);
 const exec = __nccwpck_require__(4618);
 const github = __nccwpck_require__(5107);
-const setupPython = __nccwpck_require__(8452)
 
 async function run() {
   try {
@@ -67421,6 +67412,11 @@ async function run() {
       pkgcheck_cache_dir,
       pkgcore_cache_dir
     ];
+    // use cache key unique to each run to force cache saves
+    const timestamp = Date.now();
+    const key = `pkgcheck-${github.context.runId}-${timestamp}`;
+    const restoreKeys = [`pkgcheck-${github.context.runId}-`, 'pkgcheck-'];
+
     const options = {ignoreReturnCode: true};
     await core.group('Update repo metadata', async () => {
       // ignore metadata generation errors that will be reported by pkgcheck

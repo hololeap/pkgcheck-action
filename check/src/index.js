@@ -5,7 +5,6 @@ const cache = require('@actions/cache');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const github = require('@actions/github');
-const setupPython = require('setup-python/lib/find-python')
 
 async function run() {
   try {
@@ -19,6 +18,11 @@ async function run() {
       pkgcheck_cache_dir,
       pkgcore_cache_dir
     ];
+    // use cache key unique to each run to force cache saves
+    const timestamp = Date.now();
+    const key = `pkgcheck-${github.context.runId}-${timestamp}`;
+    const restoreKeys = [`pkgcheck-${github.context.runId}-`, 'pkgcheck-'];
+
     const options = {ignoreReturnCode: true};
     await core.group('Update repo metadata', async () => {
       // ignore metadata generation errors that will be reported by pkgcheck

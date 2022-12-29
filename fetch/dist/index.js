@@ -67175,14 +67175,6 @@ module.exports = eval("require")("encoding");
 
 /***/ }),
 
-/***/ 8452:
-/***/ ((module) => {
-
-module.exports = eval("require")("setup-python/lib/find-python");
-
-
-/***/ }),
-
 /***/ 9491:
 /***/ ((module) => {
 
@@ -67407,7 +67399,6 @@ const cache = __nccwpck_require__(3276);
 const core = __nccwpck_require__(6659);
 const exec = __nccwpck_require__(4618);
 const github = __nccwpck_require__(5107);
-const setupPython = __nccwpck_require__(8452)
 
 async function run() {
   try {
@@ -67427,13 +67418,6 @@ async function run() {
     const restoreKeys = [`pkgcheck-${github.context.runId}-`, 'pkgcheck-'];
     await core.group('Restore cache', async () => {
       const cache_key = await cache.restoreCache(cache_paths, key, restoreKeys);
-    });
-
-    // use vendored setup-python action
-    // https://github.com/actions/setup-python/issues/38
-    await core.group('Set up python', async () => {
-      const installed = await setupPython.findPythonVersion('3.x', 'x64');
-      core.info(`Successfully set up ${installed.impl}-${installed.version}`);
     });
 
     await core.group('Install pkgcheck', async () => {
